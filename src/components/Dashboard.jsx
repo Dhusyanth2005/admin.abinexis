@@ -12,6 +12,14 @@ const Dashboard = () => {
     recentProducts: [],
     recentOrders: [],
   });
+const [currentTime, setCurrentTime] = useState(new Date());
+
+useEffect(() => {
+  const timer = setInterval(() => {
+    setCurrentTime(new Date());
+  }, 1000);
+  return () => clearInterval(timer);
+}, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,19 +104,20 @@ const Dashboard = () => {
                 </div>
               </div>
               <div>
-                <h2 className="text-2xl font-semibold text-white">Welcome back, Abinash</h2>
-                <p className="text-gray-400">
-                  {new Date().toLocaleString('en-IN', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    timeZone: 'Asia/Kolkata',
-                  })}
-                </p>
-              </div>
+      <h2 className="text-2xl font-semibold text-white">Welcome back, Abinash</h2>
+      <p className="text-green-400">
+        {currentTime.toLocaleString('en-IN', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit', // Added seconds for live timer effect
+          timeZone: 'Asia/Kolkata',
+        })}
+      </p>
+    </div>
             </div>
             <button
               onClick={() => navigate('/product-management')}
